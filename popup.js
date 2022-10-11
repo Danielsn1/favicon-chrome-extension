@@ -1,20 +1,10 @@
-let changeColor = document.getElementById("changeColor");
+let fileReader = document.getElementById("input");
+console.log(fileReader);
+console.log("test");
 
-chrome.storage.sync.get("color", ({ color }) => {
-    changeColor.style.backgroundColor = color;
-});
-
-changeColor.addEventListener("click", async() => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: setPageBackgroundColor,
-    });
-});
-
-function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-        document.body.style.backgroundColor = color;
-    });
-}
+fileReader.addEventListener("change", () => {
+    console.log(this.File.);
+    console.log(this)
+    console.log(this.FileReader.toString())
+    chrome.storage.sync.set({ image: this.File })
+})
