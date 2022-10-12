@@ -1,18 +1,29 @@
 let color = '#3aa757';
 
+async function getCurrentTab() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    return tab;
+}
+
+function loadFavicon(pictureURL) {
+    document.querySelector('link[rel*="icon"]').href = pictureURL
+}
+
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({ color });
     console.log('Default background color set to %cgreen', `color: ${color}`);
 });
 
-chrome.tabs.onCreated.addListener(async () => {
-    chrome.storage.sync.get("file", async (data) => {
-        console.log(data);
-        let [bookTab] = await chrome.tabs.query({ url: 'https://bookdown.org/roback/bookdown-BeyondMLR/' });
-        let [allTabs] = await chrome.tabs.query({ index: 2 });
-        // console.log(bookTab);
-        // console.log(allTabs);
-        bookTab.favIconUrl = 'images/favicon.ico';
-        console.log('test');
+chrome.tabs.onUpdated.addListener(() => {
+    chrome.storage.sync.get("image", (file) => {
+        let imageUrl = file.image.url
+        getCurrentTab().then((value) => {
+            chrome.scripting.executeScript({
+                target: { tabId: value.id },
+                func: loadFavicon,
+                args: [imageUrl]
+            })
+        })
     });
 });
