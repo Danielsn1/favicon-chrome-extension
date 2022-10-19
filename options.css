@@ -1,0 +1,12 @@
+.line {
+    display: inline-flex;
+}
+
+.line>img {
+    align-self: center;
+    margin: .5rem;
+}
+
+.line>p {
+    align-self: center;
+}
