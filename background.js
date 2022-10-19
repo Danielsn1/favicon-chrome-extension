@@ -1,4 +1,6 @@
-let color = '#3aa757';
+const MAX_ITEMS = 512
+const MAX_BYTES = 102400
+const MAX_BYTES_PER_ITEM = 8192
 
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
