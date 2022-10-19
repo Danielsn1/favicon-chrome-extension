@@ -1,4 +1,5 @@
 let page = document.getElementById("buttonDiv");
+let test = document.getElementById("test");
 let selectedClassName = "current";
 const presetButtonColors = ["#3aa757", "#e8453c", "#f9bb2d", "#4688f1"];
 
@@ -17,22 +18,35 @@ function handleButtonClick(event) {
 
 function constructOptions(buttonColors) {
     chrome.storage.sync.get("color", (data) => {
-        let currentColor = data.color;
+        chrome.storage.sync.get(null, (keyValues) => {
+            let currentColor = data.color;
+            console.log(keyValues);
 
-        for (let buttonColor of buttonColors) {
-            let button = document.createElement("button");
-            button.dataset.color = buttonColor;
-            button.style.backgroundColor = buttonColor;
+            for (let buttonColor of buttonColors) {
+                let button = document.createElement("button");
+                button.dataset.color = buttonColor;
+                button.style.backgroundColor = buttonColor;
 
 
-            if (buttonColor === currentColor) {
-                button.classList.add(selectedClassName);
+                if (buttonColor === currentColor) {
+                    button.classList.add(selectedClassName);
+                }
+
+                button.addEventListener("click", handleButtonClick);
+                page.appendChild(button);
             }
 
-            button.addEventListener("click", handleButtonClick);
-            page.appendChild(button);
-        }
-    })
+            for (let [location, { url }] of Object.entries(keyValues)) {
+                console.log(url);
+                let p = document.createElement("p");
+                let image = document.createElement("img");
+                p.innerHTML = `URL: ${location} <br> Image: ${url}`
+                image.src = url;
+                test.appendChild(p);
+                test.appendChild(image);
+            }
+        });
+    });
 }
 
 constructOptions(presetButtonColors);
