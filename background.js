@@ -18,14 +18,17 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.tabs.onUpdated.addListener(() => {
-    chrome.storage.sync.get("image", (file) => {
-        let imageUrl = file.image.url
-        getCurrentTab().then((value) => {
-            chrome.scripting.executeScript({
-                target: { tabId: value.id },
-                func: loadFavicon,
-                args: [imageUrl]
-            })
-        })
+    getCurrentTab().then((value) => {
+        chrome.storage.sync.get(value.url, (file) => {
+            console.log(file);
+            if (file) {
+                let imageUrl = file[value.url].url
+                chrome.scripting.executeScript({
+                    target: { tabId: value.id },
+                    func: loadFavicon,
+                    args: [imageUrl]
+                });
+            }
+        });
     });
 });
