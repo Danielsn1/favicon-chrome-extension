@@ -24,9 +24,12 @@ function constructOptions() {
             let image = document.createElement("img");
             p.innerHTML = `${location}`;
             image.src = url;
+            let brk = document.createElement("div");
+            brk.className = "break";
             line.appendChild(image);
             line.appendChild(p);
             wrapper.appendChild(line);
+            wrapper.appendChild(brk);
         }
     });
 }

@@ -10,3 +10,8 @@
 .line>p {
     align-self: center;
 }
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
