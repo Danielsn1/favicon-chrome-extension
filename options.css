@@ -5,9 +5,11 @@
 .line>img {
     align-self: center;
     margin: .5rem;
+    height: 16px;
+    width: 16px;
 }
 
-.line>p {
+.line>a {
     align-self: center;
 }
 
