@@ -1,0 +1,11 @@
+.img-button {
+    margin: 1rem;
+    padding: .25rem;
+    border: 2px inset grey;
+    text-align: center;
+    transition: border 100ms ease-in-out;
+}
+
+.img-button:hover {
+    border: 4px inset grey;
+}
