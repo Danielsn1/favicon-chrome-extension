@@ -1,19 +1,6 @@
 let wrapper = document.getElementById("urlsWrapper");
 let button = document.getElementById("deleteButton");
 
-// function handleButtonClick(event) {
-//     let current = event.target.parentElement.querySelector(
-//         `.${selectedClassName}`
-//     );
-//     if (current && current !== event.target) {
-//         current.classList.remove(selectedClassName);
-//     }
-
-//     let color = event.target.dataset.color;
-//     event.target.classList.add(selectedClassName);
-//     chrome.storage.sync.set({ color })
-// }
-
 function constructOptions() {
     chrome.storage.sync.get(null, (keyValues) => {
         let count = 0
@@ -51,7 +38,7 @@ function constructOptions() {
 
 constructOptions();
 
-button.addEventListener('click', (e) => {
+button.addEventListener('click', () => {
     let checks = document.querySelectorAll("input[type='checkbox']")
     checks.forEach((check) => {
         if (check.checked) {
