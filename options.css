@@ -11,6 +11,41 @@
 
 .line>a {
     align-self: center;
+    text-decoration: none;
+}
+
+.line>a:hover {
+    text-decoration: underline;
+}
+
+.line>a:visited {
+    color: black;
+}
+
+.line,
+.delete {
+    font-size: 1.25em;
+}
+
+.delete {
+    background-color: #f75e4d;
+    color: white;
+    border-color: #fa3131;
+    border-radius: 5px;
+    border-width: 1px;
+    margin-top: 1rem;
+}
+
+.delete:hover {
+    cursor: pointer;
+    background-color: #fa6959;
+}
+
+.delete:active {
+    cursor: pointer;
+    border-style: inset;
+    background-color: #f8503e;
+    border-color: #fa2b2b;
 }
 
 .break {
