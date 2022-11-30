@@ -6,10 +6,13 @@
 </head>
 
 <body>
-    <label for="input">
-        <img src="" id="inputImage" width="50px" height="50px" class="img-button">
-    </label>
-    <input type="file" id="input" style="display: none;">
+    <div class="wrapper" id="drop">
+        <label for="input" style="display: flex; justify-content: center;">
+            <img src="" id="inputImage" width="50px" height="50px" class="img-button">
+        </label>
+        <input type="file" id="input" style="display: none;" accept="image/*">
+        <input type="button" value="Clear" id="clear" class="clear-button">
+    </div>
     <script src="popup.js" type="module"></script>
 </body>
 
