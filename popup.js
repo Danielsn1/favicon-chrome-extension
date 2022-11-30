@@ -9,6 +9,13 @@ let dropZone = document.getElementById("drop");
 let reader = new FileReader();
 let url;
 
+function errorHandler(errText, popup) {
+    if (popup) {
+
+    }
+    console.error(errText);
+}
+
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     let currTabUrl = tabs[0].url;
     chrome.storage.sync.get([currTabUrl, "default"], (imgURL) => {
@@ -48,11 +55,15 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (Object.keys(await chrome.storage.sync.get()).length + 1 > MAX_ITEMS) console.error("Number of URL's has been exceded.");
         else if (file.size > MAX_BYTES_PER_ITEM) console.error("Image provided is too large.");
         else if (await chrome.storage.sync.getBytesInUse() + file.size > MAX_BYTES) console.error("Number of Bytes has been exceded.");
-        else reader.readAsDataURL(file);
+        else {
+            reader.readAsDataURL(file);
+            chrome.tabs.reload(tabs[0].id)
+        }
     })
 
     clear.addEventListener("click", () => {
         chrome.storage.sync.remove(currTabUrl);
         location.reload();
+        chrome.tabs.reload(tabs[0].id);
     });
 });
